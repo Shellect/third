@@ -4,14 +4,14 @@ namespace App\Controller;
 
 use App\Repository\PictureRepository;
 
-class MyController {
+class MainController {
     private $pictureRepository;
 
     public function __construct(PictureRepository $pictureRepository) {
         $this->pictureRepository = $pictureRepository;
     }
 
-    public function getAllRecords() {
+    public function getAllPictures() {
         return $this->pictureRepository->findAllRecords();
     }
 }
