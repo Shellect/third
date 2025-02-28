@@ -3,6 +3,7 @@
 use Doctrine\ORM\ORMSetup;
 use Doctrine\ORM\EntityManager;
 use Doctrine\DBAL\DriverManager;
+use App\Container;
 
 require_once __DIR__ . '/vendor/autoload.php';
 
@@ -28,6 +29,14 @@ $config = ORMSetup::createAttributeMetadataConfiguration($paths, $isDevMode);
 $connection = DriverManager::getConnection($dbParams, $config);
 
 // Создание EntityManager
+// Создание EntityManager
 $entityManager = new EntityManager($connection, $config);
+
+// Установка параметров для Service Container
+$container = Container::getInstance()->getContainer();
+$container->setParameter('database_host', $dbParams['host']);
+$container->setParameter('database_user', $dbParams['user']);
+$container->setParameter('database_password', $dbParams['password']);
+$container->setParameter('database_name', $dbParams['dbname']);
 
 return $entityManager;

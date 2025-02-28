@@ -4,7 +4,7 @@ namespace App\Controller;
 
 use App\Repository\UserRepository;
 
-class UserController {
+class UserController extends AbstractController {
     private $userRepository;
 
     public function __construct(UserRepository $userRepository) {
@@ -12,14 +12,17 @@ class UserController {
     }
 
     public function getAllUsers() {
-        return $this->userRepository->findAllUsers();
+        $users = $this->userRepository->findAllUsers();
+        $this->render('users', ['users' => $users]);
     }
 
     public function getUserById(int $id) {
-        return $this->userRepository->findUserById($id);
+        $user = $this->userRepository->findUserById($id);
+        $this->render('user_details', ['user' => $user]);
     }
 
     public function getUserByEmail(string $email) {
-        return $this->userRepository->findUserByEmail($email);
+        $user = $this->userRepository->findUserByEmail($email);
+        $this->render('user_details', ['user' => $user]);
     }
 }

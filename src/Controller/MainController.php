@@ -4,7 +4,7 @@ namespace App\Controller;
 
 use App\Repository\PictureRepository;
 
-class MainController {
+class MainController extends AbstractController {
     private $pictureRepository;
 
     public function __construct(PictureRepository $pictureRepository) {
@@ -12,6 +12,7 @@ class MainController {
     }
 
     public function getAllPictures() {
-        return $this->pictureRepository->findAllRecords();
+        $pictures = $this->pictureRepository->findAllRecords();
+        $this->render('pictures', ['pictures' => $pictures]);
     }
 }
