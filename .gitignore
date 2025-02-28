@@ -1,5 +1,6 @@
 vendor/
 node_modules/
+logs/
 .vs/
 .idea/
 composer.lock
