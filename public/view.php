@@ -1,6 +1,9 @@
 <?php
-require_once 'MyModel.php';
-require_once 'MyController.php';
+require_once __DIR__ . '/../vendor/autoload.php';
+
+use App\Controller\MyController;
+use App\Model\MyModel;
+use PDO;
 
 // Подключение к базе данных
 $dsn = 'mysql:host=your_host;dbname=your_dbname';
