@@ -45,7 +45,9 @@ services:
     build: .
     container_name: php
     volumes:
-      - ./src:/var/www/html
+      - ./src:/var/www/html/src
+      - ./public:/var/www/html/public
+      - ./templates:/var/www/html/templates
     env_file:
       - .env.${ENV:-dev} # Используем .env.dev по умолчанию
     environment:
