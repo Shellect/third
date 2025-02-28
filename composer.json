@@ -11,5 +11,8 @@
             "email": "example@example.com"
         }
     ],
-    "require": {}
+    "require": {
+        "doctrine/orm": "^3.3",
+        "symfony/cache": "^6.4"
+    }
 }

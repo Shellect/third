@@ -1,19 +1,13 @@
 <?php
-require_once __DIR__ . '/../vendor/autoload.php';
-
 use App\Controller\MyController;
-use App\Model\MyModel;
-use PDO;
+use App\Entity\Picture;
 
-// Подключение к базе данных
-$dsn = 'mysql:host=your_host;dbname=your_dbname';
-$username = 'your_username';
-$password = 'your_password';
-$db = new PDO($dsn, $username, $password);
+// Получаем EntityManager из bootstrap.php
+$entityManager = require __DIR__ . '/../bootstrap.php';
 
-// Создание экземпляров модели и контроллера
-$model = new MyModel($db);
-$controller = new MyController($model);
+// Создание репозитория и контроллера
+$pictureRepository = $entityManager->getRepository(Picture::class);
+$controller = new MyController($pictureRepository);
 
 // Обработка нажатия кнопки
 if (isset($_GET['action']) && $_GET['action'] == 'getAllRecords') {
@@ -37,16 +31,14 @@ if (isset($_GET['action']) && $_GET['action'] == 'getAllRecords') {
                     <th>ID</th>
                     <th>Name</th>
                     <th>Description</th>
-                    <!-- Добавьте другие заголовки столбцов, если необходимо -->
                 </tr>
             </thead>
             <tbody>
                 <?php foreach ($records as $record): ?>
                     <tr>
-                        <td><?php echo $record['id']; ?></td>
-                        <td><?php echo $record['name']; ?></td>
-                        <td><?php echo $record['description']; ?></td>
-                        <!-- Добавьте другие ячейки, если необходимо -->
+                        <td><?php echo $record->getId(); ?></td>
+                        <td><?php echo $record->getName(); ?></td>
+                        <td><?php echo $record->getDescription(); ?></td>
                     </tr>
                 <?php endforeach; ?>
             </tbody>
