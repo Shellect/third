@@ -2,7 +2,6 @@
 
 namespace App\Repository;
 
-use App\Model\Entity\Picture;
 use Doctrine\ORM\EntityRepository;
 
 class PictureRepository extends EntityRepository {

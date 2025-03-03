@@ -4,16 +4,15 @@ FROM php:8.2-fpm
 RUN apt-get update && apt-get install -y \
     libzip-dev \
     zip \
-    && docker-php-ext-install pdo_mysql zip
+    && docker-php-ext-install pdo_mysql zip xdebug
 
 # Установка Composer
 RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
 
-# Установка Monolog
-RUN composer require monolog/monolog
+COPY composer.json .
 
-# Копирование исходного кода
-COPY src /var/www/html
+# Установка Monolog
+RUN composer install
 
 # Рабочая директория
 WORKDIR /var/www/html

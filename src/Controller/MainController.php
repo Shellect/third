@@ -2,17 +2,15 @@
 
 namespace App\Controller;
 
-use App\Repository\PictureRepository;
+use App\Entity\Picture;
 
 class MainController extends AbstractController {
-    private $pictureRepository;
-
-    public function __construct(PictureRepository $pictureRepository) {
-        $this->pictureRepository = $pictureRepository;
-    }
 
     public function getAllPictures() {
-        $pictures = $this->pictureRepository->findAllRecords();
+        $pictures = $this
+            ->entityManager
+            ->getRepository(Picture::class)
+            ->findAll();
         $this->render('pictures', ['pictures' => $pictures]);
     }
 }
